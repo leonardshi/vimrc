@@ -1,3 +1,4 @@
+
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
@@ -8,7 +9,8 @@ let g:mapleader = ","
 
 "backup for no monaco font
 "set guifont=Consolas:h14
-set gfn=Monaco:h14
+"set guifont=Monaco:h12
+set guifont=Envy\ Code\ R:h12
 
 " highlight current line
 :hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -32,7 +34,7 @@ set lines=50
 
 " Global Set
 map <leader>e :e! ~/.vimrc<cr>
-let g:Source="E:\\Vim Work Folder"
+let g:Source="D:\\VimRoot"
 
 function Cw(dir)
     execute ":cd " . a:dir
@@ -55,6 +57,7 @@ set expandtab
 set smarttab
 
 " Who wants an 8 character tab?
+set tabstop=4
 set shiftwidth=4
 set softtabstop=4
 
@@ -118,9 +121,9 @@ let Tlist_Use_Right_Window = 1
 
 set diffexpr=MyDiff()
 function MyDiff()
-let opt = '-a ¨Cbinary '
-if &diffopt =~ 'icase¡¯ | let opt = opt . '-i ' | endif
-if &diffopt =~ 'iwhite¡¯ | let opt = opt . '-b ' | endif
+let opt = '-a Â¨Cbinary '
+if &diffopt =~ 'icaseÂ¡Â¯ | let opt = opt . '-i ' | endif
+if &diffopt =~ 'iwhiteÂ¡Â¯ | let opt = opt . '-b ' | endif
 let arg1 = v:fname_in
 if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
 let arg2 = v:fname_new
@@ -136,9 +139,9 @@ else
 let cmd = substitute($VIMRUNTIME, ' ', '" ', ") . '\diff"'
 endif
 else
-let cmd = $VIMRUNTIME . '\diff¡¯
+let cmd = $VIMRUNTIME . '\diffÂ¡Â¯
 endif
-silent execute '!¡¯ . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+silent execute '!Â¡Â¯ . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
 "javascript fold
@@ -273,11 +276,13 @@ Bundle 'taglist.vim'
 Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'indent'
+Bundle 'ZenCoding.vim'
 
 filetype plugin indent on   " required
 syntax on
 
-set shellslash
+"Workaround for the vundle under windows
+set shellxquote=
 
 " For NERD_tree
 autocmd vimenter * NERDTree " if !argc() | NERDTree | endif
