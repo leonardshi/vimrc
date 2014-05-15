@@ -1,4 +1,3 @@
-
 set nocompatible
 source $VIMRUNTIME/vimrc_example.vim
 source $VIMRUNTIME/mswin.vim
@@ -10,7 +9,15 @@ let g:mapleader = ","
 "backup for no monaco font
 "set guifont=Consolas:h14
 "set guifont=Monaco:h12
-set guifont=Envy\ Code\ R:h12
+set guifont=Envy\ Code\ R:h12:cANSI
+set gfw=NSimsun:h12
+
+
+"Encoding
+set encoding=utf-8
+set fileencodings=ucs-bom,utf-8,cp936
+set fileencoding=utf-8
+set termencoding=utf-8
 
 " highlight current line
 :hi CursorLine   cterm=NONE ctermbg=darkred ctermfg=white guibg=darkred guifg=white
@@ -72,7 +79,8 @@ set wildmenu
 set wildmode=list:longest,full
 
 " Got backspace?
-set backspace=2
+"set backspace=2
+set backspace=indent,eol,start
 
 " Line Numbers
 set number
@@ -121,9 +129,9 @@ let Tlist_Use_Right_Window = 1
 
 set diffexpr=MyDiff()
 function MyDiff()
-let opt = '-a ¨Cbinary '
-if &diffopt =~ 'icase¡¯ | let opt = opt . '-i ' | endif
-if &diffopt =~ 'iwhite¡¯ | let opt = opt . '-b ' | endif
+let opt = '-a –binary '
+if &diffopt =~ 'icase’ | let opt = opt . '-i ' | endif
+if &diffopt =~ 'iwhite’ | let opt = opt . '-b ' | endif
 let arg1 = v:fname_in
 if arg1 =~ ' ' | let arg1 = '"' . arg1 . '"' | endif
 let arg2 = v:fname_new
@@ -139,9 +147,9 @@ else
 let cmd = substitute($VIMRUNTIME, ' ', '" ', ") . '\diff"'
 endif
 else
-let cmd = $VIMRUNTIME . '\diff¡¯
+let cmd = $VIMRUNTIME . '\diff’
 endif
-silent execute '!¡¯ . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
+silent execute '!’ . cmd . ' ' . opt . arg1 . ' ' . arg2 . ' > ' . arg3 . eq
 endfunction
 
 "javascript fold
@@ -223,6 +231,9 @@ nmap <silent> <F2> :TagbarToggle<CR>
     let g:tagbar_ctags_bin = 'ctags'
     let g:tagbar_width = 30
 
+" NERDTree
+map <leader>nd :NERDTree<cr> 
+
 " config XML
 " base on http://www.pinkjuice.com/howto/vimxml/setup.xml
 
@@ -277,6 +288,7 @@ Bundle 'The-NERD-Commenter'
 Bundle 'The-NERD-tree'
 Bundle 'indent'
 Bundle 'ZenCoding.vim'
+Bundle 'csv.vim'
 
 filetype plugin indent on   " required
 syntax on
